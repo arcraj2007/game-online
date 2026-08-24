@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TokenPlay — Play & Earn</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Video Background -->
+  <video
+    class="background-video"
+    autoplay
+    muted
+    loop
+    playsinline
+  >
+    <source src="/background.mp4" type="video/mp4">
+  </video>
+
+  <div class="background-overlay"></div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+
+    <div class="logo">
+      <span>◈</span> TokenPlay
+    </div>
+
+    <nav>
+      <a href="#games">Games</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#wallet">Wallet</a>
+    </nav>
+
+    <button class="login-btn" onclick="openLogin()">
+      Login
+    </button>
+
+  </header>
+
+  <!-- Hero -->
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="badge">
+          🎮 PLAY • EARN • REDEEM
+        </div>
+
+        <h1>
+          Play Games.<br>
+          <span>Earn Tokens.</span>
+        </h1>
+
+        <p>
+          Challenge yourself, earn rewards and build your
+          token balance while having fun.
+        </p>
+
+        <div class="hero-buttons">
+
+          <button
+            class="primary-btn"
+            onclick="scrollToGames()"
+          >
+            Start Playing
+          </button>
+
+          <button
+            class="secondary-btn"
+            onclick="openLogin()"
+          >
+            Create Account
+          </button>
+
+        </div>
+
+        <div class="stats">
+
+          <div>
+            <strong id="players">125K+</strong>
+            <span>Players</span>
+          </div>
+
+          <div>
+            <strong>24/7</strong>
+            <span>Games</span>
+          </div>
+
+          <div>
+            <strong>Fast</strong>
+            <span>Rewards</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Games -->
+    <section id="games" class="section">
+
+      <div class="section-title">
+        <span>GAME CENTER</span>
+        <h2>Choose Your Game</h2>
+        <p>Play skill-based games and earn tokens.</p>
+      </div>
+
+      <div class="games-grid">
+
+        <article class="game-card">
+
+          <div class="game-image memory">
+            🧠
+          </div>
+
+          <div class="game-info">
+
+            <h3>Memory Challenge</h3>
+
+            <p>
+              Test your memory and beat your best score.
+            </p>
+
+            <div class="game-footer">
+
+              <span>
+                🪙 Up to 100 tokens
+              </span>
+
+              <button onclick="startGame('memory')">
+                Play
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="game-card">
+
+          <div class="game-image reaction">
+            ⚡
+          </div>
+
+          <div class="game-info">
+
+            <h3>Reaction Rush</h3>
+
+            <p>
+              How fast can you react?
+            </p>
+
+            <div class="game-footer">
+
+              <span>
+                🪙 Up to 75 tokens
+              </span>
+
+              <button onclick="startGame('reaction')">
+                Play
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="game-card">
+
+          <div class="game-image puzzle">
+            🧩
+          </div>
+
+          <div class="game-info">
+
+            <h3>Daily Puzzle</h3>
+
+            <p>
+              Solve today's challenge.
+            </p>
+
+            <div class="game-footer">
+
+              <span>
+                🪙 Up to 150 tokens
+              </span>
+
+              <button onclick="startGame('puzzle')">
+                Play
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- Wallet -->
+    <section id="wallet" class="section">
+
+      <div class="wallet-card">
+
+        <div>
+          <span class="wallet-label">
+            YOUR TOKEN BALANCE
+          </span>
+
+          <h2>
+            <span id="tokenBalance">0</span>
+            <small>TKN</small>
+          </h2>
+
+          <p>
+            Keep playing to increase your balance.
+          </p>
+        </div>
+
+        <button
+          class="withdraw-btn"
+          onclick="openWithdraw()"
+        >
+          Withdraw
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- Rewards -->
+    <section id="rewards" class="section rewards">
+
+      <div class="section-title">
+        <span>REWARDS</span>
+        <h2>Turn Your Tokens Into Rewards</h2>
+      </div>
+
+      <div class="reward-grid">
+
+        <div class="reward">
+          <div>🪙</div>
+          <h3>Earn</h3>
+          <p>Play games and complete verified challenges.</p>
+        </div>
+
+        <div class="reward">
+          <div>📈</div>
+          <h3>Grow</h3>
+          <p>Build your balance over time.</p>
+        </div>
+
+        <div class="reward">
+          <div>💳</div>
+          <h3>Withdraw</h3>
+          <p>Request a payout when you reach the minimum.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+
+    <div class="modal-box">
+
+      <button class="close" onclick="closeLogin()">×</button>
+
+      <h2>Welcome Back</h2>
+
+      <p>Login to continue playing.</p>
+
+      <form onsubmit="login(event)">
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Email address"
+          required
+        >
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+        >
+
+        <button class="primary-btn" type="submit">
+          Login
+        </button>
+
+      </form>
+
+      <p class="small">
+        New here?
+        <a href="#">Create an account</a>
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- Withdraw Modal -->
+  <div id="withdrawModal" class="modal">
+
+    <div class="modal-box">
+
+      <button
+        class="close"
+        onclick="closeWithdraw()"
+      >
+        ×
+      </button>
+
+      <h2>Withdraw Tokens</h2>
+
+      <p>
+        Available:
+        <strong>
+          <span id="withdrawBalance">0</span> TKN
+        </strong>
+      </p>
+
+      <form onsubmit="requestWithdrawal(event)">
+
+        <input
+          type="number"
+          id="withdrawAmount"
+          placeholder="Token amount"
+          min="100"
+          required
+        >
+
+        <select id="withdrawMethod">
+
+          <option value="">
+            Select payout method
+          </option>
+
+          <option value="bank">
+            Bank Account
+          </option>
+
+          <option value="upi">
+            UPI
+          </option>
+
+        </select>
+
+        <input
+          type="text"
+          id="paymentDetails"
+          placeholder="Payment details"
+          required
+        >
+
+        <button class="primary-btn" type="submit">
+          Submit Withdrawal
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
